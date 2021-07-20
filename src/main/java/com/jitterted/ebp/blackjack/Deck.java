@@ -18,11 +18,13 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+    //query
     public int size() {
         return cards.size();
     }
 
+    //command
     public Card draw() {
-        return cards.remove(0);
+        return cards.remove(0); //mutate
     }
 }
