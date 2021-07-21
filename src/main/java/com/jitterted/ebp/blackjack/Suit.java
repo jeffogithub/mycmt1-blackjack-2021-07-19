@@ -6,24 +6,18 @@ public enum Suit {
     CLUBS("♣"),
     DIAMONDS("♦");
 
-
     private final String symbol;
 
     Suit(String symbol) {
         this.symbol = symbol;
     }
 
-    //GOAL:MAYBE get rid of this
-    public String getSymbol() {
+    @Override
+    public String toString() {
         return symbol;
     }
 
-    public static Suit fromSymbol(String symbol) {
-        for(Suit suit : Suit.values()) {
-            if (suit.symbol.equals(symbol)) {
-                return suit;
-            }
-        }
-        return Suit.CLUBS;
+    boolean isRed() {
+        return "♥♦".contains(symbol);
     }
 }

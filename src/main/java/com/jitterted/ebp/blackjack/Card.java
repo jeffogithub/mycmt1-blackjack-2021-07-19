@@ -8,11 +8,6 @@ public class Card {
     private final Suit suit;
     private final String rank;
 
-    //GOAL: Get rid of this constructor
-    public Card(String suit, String rank) {
-        this(Suit.fromSymbol(suit), rank);
-    }
-
     public Card(Suit suit, String rank) {
         this.suit = suit;
         this.rank = rank;
@@ -33,12 +28,12 @@ public class Card {
         lines[0] = "┌─────────┐";
         lines[1] = String.format("│%s%s       │", rank, rank.equals("10") ? "" : " ");
         lines[2] = "│         │";
-        lines[3] = String.format("│    %s    │", suit.getSymbol());
+        lines[3] = String.format("│    %s    │", suit);
         lines[4] = "│         │";
         lines[5] = String.format("│       %s%s│", rank.equals("10") ? "" : " ", rank);
         lines[6] = "└─────────┘";
 
-        Ansi.Color cardColor = "♥♦".contains(suit.getSymbol()) ? Ansi.Color.RED : Ansi.Color.BLACK;
+        Ansi.Color cardColor = suit.isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
         return ansi()
                 .fg(cardColor).toString()
                 + String.join(ansi().cursorDown(1)
