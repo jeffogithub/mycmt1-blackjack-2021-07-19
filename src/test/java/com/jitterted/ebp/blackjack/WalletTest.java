@@ -56,4 +56,45 @@ public class WalletTest {
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void testBetting10ReducesWalletBalanceBy10() {
+        Wallet wallet = new Wallet();
+        wallet.addMoney(15);
+        wallet.bet(10);
+        int result = wallet.getBalance();
+        assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void testBettingMultipleTimesReducesBalance() {
+        Wallet wallet = new Wallet();
+        wallet.addMoney(15);
+        wallet.bet(5);
+        wallet.bet(5);
+        int result = wallet.getBalance();
+        assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void testBettingWholeWalletAmountEmptiesWallet() {
+        Wallet wallet = new Wallet();
+        wallet.addMoney(15);
+        wallet.bet(10);
+        wallet.bet(5);
+        assertThat(wallet.isEmpty()).isTrue();
+    }
+
+    @Test
+    void testCannotBetMoreThanWeHave() {
+        Wallet wallet = new Wallet();
+        wallet.addMoney(15);
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                wallet.bet(20);
+            }
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

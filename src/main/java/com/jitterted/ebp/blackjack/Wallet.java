@@ -19,4 +19,10 @@ public class Wallet {
     public int getBalance() {
         return balance;
     }
+
+    public void bet(int amount) {
+        if (balance - amount < 0) throw new IllegalArgumentException();
+        balance = balance-amount;
+
+    }
 }
